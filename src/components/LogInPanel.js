@@ -1,4 +1,5 @@
 import React from 'react';
+import request from 'superagent';
 
 class LogInPanel extends React.Component {
 
@@ -20,9 +21,15 @@ class LogInPanel extends React.Component {
         /**
          * Loading the user from Paloma WS
          */
-        component.setState({
-            authenticationUrl: 'https://accounts.google.com/o/oauth2/auth?client_id=852815160721-odq9kl622hj1pkpa0acrbd2rsii9c59m.apps.googleusercontent.com&redirect_uri=http://localhost:8080/paloma&response_type=code&scope=https://www.googleapis.com/auth/userinfo.profile%20https://www.googleapis.com/auth/userinfo.email&state=google;-1784335051'
-        });
+        request
+        .get("http://localhost:8080/paloma/authentication/url")
+        .end(function(err, res) {
+          
+          component.setState({
+              authenticationUrl: res.text
+          });
+        })
+
 
     }
 
@@ -41,4 +48,3 @@ class LogInPanel extends React.Component {
 }
 
 export default LogInPanel;
-
