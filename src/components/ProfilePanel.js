@@ -2,18 +2,26 @@ require('styles/bootstrap.css');
 require('styles/bootstrap-theme.css');
 require('styles/style.css');
 
+import CreateProfilePanel from './CreateProfilePanel';
+
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 
 import React from 'react';
 
 class ProfilePanel extends React.Component {
+  constructor(props) {
+      super(props);
+  }
+    createProfile() {
+      return this.props.changeContextViewPanel(<CreateProfilePanel />);
+    }
     render() {
         return (
             <Row>
                 <Col mdOffset={2} md={4} className={'text-center'}>
                     <img className="img-rounded clickable" alt="Create profile"
-                         src='images/user-add.png'/>
+                         src='images/user-add.png' onClick={this.createProfile.bind(this)}/>
 
                     <p>Create new profile</p>
                 </Col>

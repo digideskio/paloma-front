@@ -10,7 +10,7 @@ class LogInPanel extends React.Component {
         }
     }
 
-    componentDidMount() {
+    componentWillMount() {
         var component = this;
 
 /*        var handleError = function () {
@@ -24,7 +24,6 @@ class LogInPanel extends React.Component {
         request
         .get("http://localhost:8080/paloma/authentication/url")
         .end(function(err, res) {
-          
           component.setState({
               authenticationUrl: res.text
           });

@@ -4,14 +4,17 @@ require('styles/bootstrap.css');
 require('styles/bootstrap-theme.css');
 var url = require('url');
 
+
 import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 
-//import request from 'request';
+import request from 'superagent';
 import React from 'react';
 import LogInPanel from './LogInPanel';
+import LogOutPanel from './LogOutPanel';
 import LoggedUserNavItems from './LoggedUserNavItems';
+import ProfilePanel from './ProfilePanel';
 import NavBar from './NavBar';
 
 class AppComponent extends React.Component {
@@ -23,21 +26,26 @@ class AppComponent extends React.Component {
             authenticationPanel: <LogInPanel buildNotificationPanel={component.buildNotificationPanel}/>,
             loggedUserNavItems: '',
             notificationPanel : '',
-            profilePanel: ''
+            currentContextView: '',
+            logOut: '',
+            user: null
+
         }
     }
 
     getUrlParam(requestUrl, param) {
-    return url.parse(requestUrl, true).query.param;
+      return url.parse(requestUrl, true).query[param];
     }
 
     logOut(event) {
+        console.log(this);
         this.setState({
             user : undefined,
             authenticationPanel: <LogInPanel />,
             loggedUserNavItems: '',
             profilePanel: ''
         });
+        sessionStorage.removeItem("user");
     }
 
     buildNotificationPanel(alertTypeParam, messageParam) {
@@ -47,14 +55,40 @@ class AppComponent extends React.Component {
         })
     }
 
-    componentDidMount(){
+    /**
+  	* Change the current context view
+  	*/
+  	changeContextViewPanel(context) {
+      console.log(context);
+  		this.setState({
+  			currentContextView : context
+  		})
+  	}
+
+    loadLoggedUserView () {
+  		this.setState({
+  			user : sessionStorage.getItem("user"),
+  			loggedUserNavItems : <LoggedUserNavItems/>,
+  			authenticationPanel : <LogOutPanel user={sessionStorage.getItem("user")}
+  			logOut={this.logOut.bind(this)}/>,
+  			currentContextView : <ProfilePanel
+  			changeContextViewPanel={this.changeContextViewPanel.bind(this)} />,
+  		});
+  	}
+
+    componentWillMount(){
         var component = this;
-        //request
-        //    .get('http://jsonplaceholder.typicode.com/todos')
-        //    .on('response', function(response) {
-        //        console.log(response.statusCode)
-        //        console.log(response.headers['content-type'])
-        //    });
+        var code = component.getUrlParam(window.location.href, 'code');
+        if(!!code || sessionStorage.getItem("user") != null) {
+          if(sessionStorage.getItem("user") == null) {
+            request
+            .get("http://localhost:8080/paloma/authentication?code=" + code)
+            .end(function (err, res) {
+                user: sessionStorage.setItem("user", res);
+            });
+          }
+          component.loadLoggedUserView();
+        }
     }
 
     render() {
@@ -70,7 +104,7 @@ class AppComponent extends React.Component {
                         {this.state.notificationPanel}
                     </Col>
                 </Row>
-                { this.state.profilePanel }
+                { this.state.currentContextView }
             </Grid>
         );
     }
