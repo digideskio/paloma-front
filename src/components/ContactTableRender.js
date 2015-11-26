@@ -13,11 +13,27 @@ class ContactTableRender extends React.Component {
   }
   render() {
     return(
-      <Table responsive>
-        <tbody>
+      <Table responsive striped bordered hover>
+        <thead>
           <tr>
-            <td>Nous voilà</td>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Email</th>
+            <th>Phone number</th>
           </tr>
+        </thead>
+        <tbody>
+          {this.props.contacts.map(function (contact){
+            return (
+              <tr key={contact.id}>
+                <td>{contact.firstName}</td>
+                <td>{contact.lastName}</td>
+                <td>{contact.email}</td>
+                <td>{contact.phoneNumber}</td>
+              </tr>
+            );
+          })}
+
         </tbody>
 
       </Table>

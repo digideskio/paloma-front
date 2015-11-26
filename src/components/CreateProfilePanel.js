@@ -25,17 +25,18 @@ class CreateProfilePanel extends React.Component{
 	* Handle the profile submission
 	*/
 	handleSubmit (e) {
-    /*
+
 		e.preventDefault();
+
     request
     .post('http://localhost:8080/paloma/contact')
     .set('Content-Type', 'application/json')
     .send(JSON.stringify(this.contact))
     .end(function (err, res) {
 
-    });*/
-    console.log('Je passe en list panel');
+    });
     this.props.changeContextViewPanel(<ProfileListPanel/>);
+    return false;
 	}
   render () {
     return (

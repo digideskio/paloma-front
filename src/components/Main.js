@@ -80,7 +80,6 @@ class AppComponent extends React.Component {
                   currentContextView : <ProfilePanel
                   changeContextViewPanel={component.changeContextViewPanel.bind(component)} />
                 });
-                console.log(component.state.user);
             });
           }
         }
