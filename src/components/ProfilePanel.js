@@ -14,7 +14,8 @@ class ProfilePanel extends React.Component {
       super(props);
   }
     createProfile() {
-      return this.props.changeContextViewPanel(<CreateProfilePanel />);
+      return this.props.changeContextViewPanel(<CreateProfilePanel
+        changeContextViewPanel={this.props.changeContextViewPanel.bind(this)} />);
     }
     render() {
         return (

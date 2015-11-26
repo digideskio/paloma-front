@@ -5,6 +5,7 @@ require('styles/style.css');
 
 import React from 'react';
 import request from 'superagent';
+import ProfileListPanel from './ProfileListPanel';
 
 /**
 * The profile creation panel
@@ -24,6 +25,7 @@ class CreateProfilePanel extends React.Component{
 	* Handle the profile submission
 	*/
 	handleSubmit (e) {
+    /*
 		e.preventDefault();
     request
     .post('http://localhost:8080/paloma/contact')
@@ -31,7 +33,8 @@ class CreateProfilePanel extends React.Component{
     .send(JSON.stringify(this.contact))
     .end(function (err, res) {
 
-    });
+    });*/
+    this.props.changeContextViewPanel(<ProfileListPanel/>);
 	}
   render () {
     return (

@@ -29,7 +29,6 @@ class AppComponent extends React.Component {
             currentContextView: '',
             logOut: '',
             user: null
-
         }
     }
 
@@ -65,17 +64,6 @@ class AppComponent extends React.Component {
   		})
   	}
 
-    loadLoggedUserView () {
-  		this.setState({
-  			user : sessionStorage.getItem("user"),
-  			loggedUserNavItems : <LoggedUserNavItems/>,
-  			authenticationPanel : <LogOutPanel user={sessionStorage.getItem("user")}
-  			logOut={this.logOut.bind(this)}/>,
-  			currentContextView : <ProfilePanel
-  			changeContextViewPanel={this.changeContextViewPanel.bind(this)} />,
-  		});
-  	}
-
     componentWillMount(){
         var component = this;
         var code = component.getUrlParam(window.location.href, 'code');
@@ -83,11 +71,23 @@ class AppComponent extends React.Component {
           if(sessionStorage.getItem("user") == null) {
             request
             .get("http://localhost:8080/paloma/authentication?code=" + code)
+            .set('Content-Type', 'application/json')
             .end(function (err, res) {
-                user: sessionStorage.setItem("user", res);
+                component.state.user = res.body;
+                sessionStorage.setItem("user", component.state.user);
+                component.setState({
+                  user : sessionStorage.getItem("user"),
+                  loggedUserNavItems : <LoggedUserNavItems/>,
+                  authenticationPanel : <LogOutPanel user={sessionStorage.getItem("user")}/>,
+                  logOut : component.logOut.bind(component),
+                  currentContextView : <ProfilePanel
+                  changeContextViewPanel={component.changeContextViewPanel.bind(component)} />
+                });
+                console.log(component + " voila");
             });
           }
-          component.loadLoggedUserView();
+
+
         }
     }
 
