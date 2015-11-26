@@ -28,7 +28,7 @@ class AppComponent extends React.Component {
             notificationPanel : '',
             currentContextView: '',
             logOut: '',
-            user: null
+            user: {}
         }
     }
 
@@ -37,12 +37,12 @@ class AppComponent extends React.Component {
     }
 
     logOut(event) {
-        console.log(this);
         this.setState({
-            user : undefined,
+            user : null,
             authenticationPanel: <LogInPanel />,
             loggedUserNavItems: '',
-            profilePanel: ''
+            profilePanel: '',
+            currentContextView: ''
         });
         sessionStorage.removeItem("user");
     }
@@ -58,7 +58,6 @@ class AppComponent extends React.Component {
   	* Change the current context view
   	*/
   	changeContextViewPanel(context) {
-      console.log(context);
   		this.setState({
   			currentContextView : context
   		})
@@ -73,21 +72,17 @@ class AppComponent extends React.Component {
             .get("http://localhost:8080/paloma/authentication?code=" + code)
             .set('Content-Type', 'application/json')
             .end(function (err, res) {
-                component.state.user = res.body;
-                sessionStorage.setItem("user", component.state.user);
                 component.setState({
-                  user : sessionStorage.getItem("user"),
+                  user : res.body,
                   loggedUserNavItems : <LoggedUserNavItems/>,
-                  authenticationPanel : <LogOutPanel user={sessionStorage.getItem("user")}/>,
-                  logOut : component.logOut.bind(component),
+                  authenticationPanel : <LogOutPanel user={res.body}
+                  logOut={component.logOut.bind(component)}/>,
                   currentContextView : <ProfilePanel
                   changeContextViewPanel={component.changeContextViewPanel.bind(component)} />
                 });
-                console.log(component + " voila");
+                console.log(component.state.user);
             });
           }
-
-
         }
     }
 

@@ -34,6 +34,7 @@ class CreateProfilePanel extends React.Component{
     .end(function (err, res) {
 
     });*/
+    console.log('Je passe en list panel');
     this.props.changeContextViewPanel(<ProfileListPanel/>);
 	}
   render () {

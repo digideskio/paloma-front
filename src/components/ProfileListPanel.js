@@ -21,12 +21,10 @@ class ProfileListPanel extends React.Component {
       var component = this;
       request
       .get("http://localhost:8080/paloma/contact")
-      .accept('json')
       .end(function (err, res) {
         component.setState({
-          contacts : res
+          contacts : JSON.parse(res.text)
         });
-        console.log(res);
       });
 
     }
