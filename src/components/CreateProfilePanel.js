@@ -52,7 +52,7 @@ class CreateProfilePanel extends React.Component{
           </div>
         </div>
 				<div className="form-group">
-          <label className="col-md-2 control-label" htmlFor="phone">Phone</label>
+          <label className="col-md-2 control-label" htmlFor="phone">Phone *</label>
           <div className="col-md-3">
             <input id="phone" className="form-control" type="text" onChange={this.handleString.bind(this)} required/>
           </div>
