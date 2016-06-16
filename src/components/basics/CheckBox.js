@@ -2,9 +2,8 @@ require('styles/bootstrap.css');
 require('styles/bootstrap-theme.css');
 require('styles/style.css');
 
-import {Checkbox, FormGroup, FormControl} from 'react-bootstrap';
+import {Checkbox, FormGroup} from 'react-bootstrap';
 import React from 'react';
-import classNames from 'classnames';
 
 class CheckBoxForm extends React.Component {
 

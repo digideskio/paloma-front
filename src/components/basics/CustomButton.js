@@ -4,7 +4,6 @@ require('styles/style.css');
 
 import {Button} from 'react-bootstrap';
 import React from 'react';
-import classNames from 'classnames';
 
 class CustomButton extends React.Component {
 

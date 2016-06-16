@@ -5,7 +5,6 @@ require('react-datetime/css/react-datetime.css');
 
 import DateTimeField from 'react-datetime';
 import React from 'react';
-import classNames from 'classnames';
 
 class FormDate extends React.Component {
 

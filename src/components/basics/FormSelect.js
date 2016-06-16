@@ -4,7 +4,6 @@ require('styles/style.css');
 
 import {ControlLabel, FormControl, FormGroup} from 'react-bootstrap';
 import React from 'react';
-import classNames from 'classnames';
 
 class FormSelect extends React.Component {
 
