@@ -10,7 +10,6 @@ class FormSelect extends React.Component {
     static propTypes = {
         labelText: React.PropTypes.string.isRequired,
         id: React.PropTypes.string.isRequired,
-        value: React.PropTypes.string,
         onChange: React.PropTypes.func,
         validity: React.PropTypes.string,
         listSelect: React.PropTypes.array

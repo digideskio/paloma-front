@@ -8,7 +8,7 @@ import React from 'react';
 class FormText extends React.Component {
 
     static propTypes = {
-        placeHolderValue: React.PropTypes.string.isRequired,
+        placeholder: React.PropTypes.string.isRequired,
         labelText: React.PropTypes.string.isRequired,
         id: React.PropTypes.string.isRequired,
         value: React.PropTypes.string,
@@ -40,7 +40,7 @@ class FormText extends React.Component {
                 <FormControl
                     componentClass='input'
                     type='text'
-                    placeholder={this.props.placeHolderValue}
+                    placeholder={this.props.placeholder}
                     onChange={this.onChange}
                     onBlur={this.props.onBlur}
                     value={this.props.text}

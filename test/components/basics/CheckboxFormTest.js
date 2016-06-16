@@ -7,7 +7,7 @@ import React from 'react';
 import createComponent from 'helpers/shallowRenderHelper';
 import {Checkbox, FormGroup} from 'react-bootstrap';
 
-import CheckBox from 'components/basics/CheckBox';
+import CheckboxForm from 'components/basics/CheckboxForm';
 
 describe('CheckboxComponent', () => {
     let CheckboxComponent;
@@ -15,11 +15,15 @@ describe('CheckboxComponent', () => {
     let propsCreateComponent = {'id':'1', 'listCheckBox':['MISSION', 'TEST'], 'inline':false};
 
     beforeEach(() => {
-      CheckboxComponent = createComponent(CheckBox, propsCreateComponent);
+      CheckboxComponent = createComponent(CheckboxForm, propsCreateComponent);
     });
 
     it('should have FormGroup as main type', () => {
       expect(CheckboxComponent.type).to.equal(FormGroup);
+    });
+
+    it('should have "propsCreateComponent.listCheckBox.length" children', () => {
+      expect(CheckboxComponent.props.children.length).to.equal(propsCreateComponent.listCheckBox.length);
     });
 
     it('should have Checkbox as first child', () => {

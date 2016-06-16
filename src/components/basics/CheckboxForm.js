@@ -5,13 +5,13 @@ require('styles/style.css');
 import {Checkbox, FormGroup} from 'react-bootstrap';
 import React from 'react';
 
-class CheckBoxForm extends React.Component {
+class CheckboxForm extends React.Component {
 
     static propTypes = {
         id: React.PropTypes.string.isRequired,
         listCheckBox: React.PropTypes.array.isRequired,
         onChange: React.PropTypes.func,
-        validity: React.PropTypes.string.bool,
+        validity: React.PropTypes.bool,
         inline: React.PropTypes.bool
 
     }
@@ -45,4 +45,4 @@ class CheckBoxForm extends React.Component {
     }
 }
 
-export default CheckBoxForm;
+export default CheckboxForm;
