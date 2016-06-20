@@ -2,7 +2,7 @@ require('styles/bootstrap.css');
 require('styles/bootstrap-theme.css');
 require('styles/style.css');
 
-import {ControlLabel, FormControl, FormGroup} from 'react-bootstrap';
+import {ControlLabel, FormControl, Col, Glyphicon} from 'react-bootstrap';
 import React from 'react';
 
 class FormText extends React.Component {
@@ -13,7 +13,6 @@ class FormText extends React.Component {
         id: React.PropTypes.string.isRequired,
         value: React.PropTypes.string,
         onChange: React.PropTypes.func,
-        onBlur: React.PropTypes.func,
         validity: React.PropTypes.string
     }
 
@@ -21,32 +20,37 @@ class FormText extends React.Component {
       super(props);
     }
 
-    onChange(e) {
+    onChange = (e) =>  {
         if(this.props.onChange){
-            this.props.onChange();
+            this.props.onChange(e, this.props.id);
         }
     }
 
-    onBlur(e) {
-        if(this.props.onChange){
-            this.props.onChange();
+    getGlyphicon = () => {
+        if(this.props.validity !== undefined){
+            let glyphName = this.props.validity === 'success' ? 'ok' : 'remove';
+            return (<Glyphicon bsRole={'feedback'} glyph={glyphName} className='form-control-feedback' bsClass='glyphicon'/>);
         }
     }
 
     render() {
         return (
-            <FormGroup controlId={'formText-' + this.props.id} validationState={this.props.validity}>
-                <ControlLabel>{this.props.labelText}</ControlLabel>
-                <FormControl
-                    componentClass='input'
-                    type='text'
-                    placeholder={this.props.placeholder}
-                    onChange={this.onChange}
-                    onBlur={this.props.onBlur}
-                    value={this.props.text}
-                />
-                <FormControl.Feedback />
-            </FormGroup>
+                <div className={'has-' + this.props.validity}>
+                    <Col componentClass={ControlLabel} md={2}>
+                        {this.props.labelText}
+                    </Col>
+                    <Col md={3}>
+                        <FormControl
+                            componentClass='input'
+                            type='text'
+                            placeholder={this.props.placeholder}
+                            onChange={this.onChange}
+                            value={this.props.text}
+                        />
+                        <FormControl.Feedback/>
+                        {this.getGlyphicon()}
+                    </Col>
+                </div>
         );
     }
 }

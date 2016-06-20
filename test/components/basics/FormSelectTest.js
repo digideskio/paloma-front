@@ -9,7 +9,7 @@ import {ControlLabel, FormControl, FormGroup} from 'react-bootstrap';
 
 import FormSelect from 'components/basics/FormSelect';
 
-describe('CheckboxComponent', () => {
+describe('FormSelectComponent', () => {
     let SelectComponent;
     let SelectChildren;
     let propsCreateComponent = {'id':'1', 'listSelect': [{'value':'value1', 'label':1}, {'value':'value2', 'label':2}], 'labelText': 'mySelect'};

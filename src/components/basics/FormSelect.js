@@ -26,9 +26,9 @@ class FormSelect extends React.Component {
     }
 
     makeListOptions(options) {
-        return options.map(function (option, i){
+        return options.map( (option, i) =>{
            return (<option key={'option'+i} value={option.value}>{option.label}</option>);
-       }.bind(this));
+       });
     }
 
     render() {

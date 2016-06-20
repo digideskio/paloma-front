@@ -8,7 +8,6 @@ import React from 'react';
 class CustomButton extends React.Component {
 
     static propTypes = {
-        onChange: React.PropTypes.func.isRequired,
         label: React.PropTypes.string.isRequired,
         bsSize: React.PropTypes.string,
         isDisabled: React.PropTypes.bool,
