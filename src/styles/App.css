@@ -3,3 +3,7 @@
 .clickable{
     cursor: pointer;
 }
+
+.form-control-feedback{
+    margin-right: 10px;
+}
